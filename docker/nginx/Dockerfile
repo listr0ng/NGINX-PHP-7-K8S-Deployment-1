@@ -3,7 +3,7 @@ FROM quay.io/scottrigby/docker-nginx:upload-progress
 ENV GOTPL_VER 0.1.5
 ENV GOTPL_URL https://github.com/wodby/gotpl/releases/download/${GOTPL_VER}/gotpl-alpine-linux-amd64-${GOTPL_VER}.tar.gz
 
-ADD docker/repositories /etc/apk/repositories
+ADD repositories /etc/apk/repositories
 
 RUN apk update && apk add \
 		# Needed to run entrypoint script.
@@ -21,7 +21,7 @@ RUN apk update && apk add \
 		ca-certificates && \
 	rm -rf /var/cache/apk/*
 
-COPY docker/nginx/drupal.conf.tpl /etc/gotpl/
-COPY docker/nginx/docker-entrypoint.sh /docker-entrypoint.sh
+COPY drupal.conf.tpl /etc/gotpl/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 CMD ["/docker-entrypoint.sh"]
