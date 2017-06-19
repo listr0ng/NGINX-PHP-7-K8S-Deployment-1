@@ -1,6 +1,6 @@
 FROM php:7.1.5-fpm-alpine
 
-ADD docker/repositories /etc/apk/repositories
+ADD repositories /etc/apk/repositories
 
 # To-do: Find better way to install GD (Drupal install requirement).
 # See: https://stackoverflow.com/a/42100719
@@ -28,8 +28,8 @@ RUN apk update && apk add \
     imagemagick \
     vim
 
-COPY docker/php/html/ /var/www/html/
-COPY docker/php/docker-entrypoint.sh /docker-entrypoint.sh
+COPY html/ /var/www/html/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 EXPOSE 9000
 
